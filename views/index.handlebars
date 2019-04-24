@@ -17,8 +17,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/delete">
-                        <button class="btn btn-primary">
+                    <a href="/clear">
+                        <button class="btn btn-primary ml-2">
                             Clear articles!
                         </button>
                     </a>
@@ -28,13 +28,23 @@
         </div>
     </nav>
     {{#each article}}
-    <div data-id="{{id}}">
-        <p>
-            {{title}}
-        </p>
-        <a>
-            {{link}}
-        </a>
+    <div class="card m-3">
+        <div class="card-header">
+            <h3>
+                <a href="{{link}}">
+                    {{title}}
+                </a>
+
+            </h3>
+            <a class="btn btn-secondary" data-id="{{id}}">
+                Save Article
+            </a>
+        </div>
+        <div class="card-body">
+            <p>
+                {{summary}}
+            </p>
+        </div>
     </div>
     {{/each}}
 

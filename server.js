@@ -21,6 +21,13 @@ mongoose.connect("mongodb://localhost/newsScraperdb", { useNewUrlParser: true })
 
 // Routes
 app.get("/", function (req, res) {
+  db.Article.find({}).then(function (data) {
+    let hbsObject = {
+      article: data
+    }
+
+    res.render("index", hbsObject);
+  })
 
 
 })
@@ -57,8 +64,19 @@ app.get("/scrape", function (req, res) {
 
 
     res.send("Scrape Complete");
+    // Window.location.reload(true);
+
+
   });
 });
+
+app.get("/clear", function (req, res) {
+  db.Article.deleteMany().then(function (data) {
+    res.send("deleted all articles")
+    // Window.location.reload(true);
+
+  })
+})
 
 
 app.get("/articles", function (req, res) {
