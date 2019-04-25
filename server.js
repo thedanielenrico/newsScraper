@@ -21,7 +21,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScraperdb"
 mongoose.connect(MONGODB_URI);
 // mongoose.connect("mongodb://localhost/newsScraperdb", { useNewUrlParser: true });
 
-// Routes
+// Routes                       
 app.get("/", function (req, res) {
   db.Article.find({}).then(function (data) {
     let hbsObject = {
@@ -65,8 +65,8 @@ app.get("/scrape", function (req, res) {
     });
 
 
-    res.send("Scrape Complete");
-    // Window.location.reload(true);
+    // res.send("Scrape Complete");
+    window.location.replace("/");
 
 
   });
@@ -75,7 +75,8 @@ app.get("/scrape", function (req, res) {
 app.get("/clear", function (req, res) {
   db.Article.deleteMany().then(function (data) {
     res.send("deleted all articles")
-    // Window.location.reload(true);
+    window.location.replace("/");
+
 
   })
 })
