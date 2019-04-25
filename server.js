@@ -65,8 +65,7 @@ app.get("/scrape", function (req, res) {
     });
 
 
-    // res.send("Scrape Complete");
-    window.location.replace("/");
+    res.redirect("/");
 
 
   });
@@ -74,8 +73,8 @@ app.get("/scrape", function (req, res) {
 
 app.get("/clear", function (req, res) {
   db.Article.deleteMany().then(function (data) {
-    res.send("deleted all articles")
-    window.location.replace("/");
+    res.redirect("/");
+
 
 
   })
