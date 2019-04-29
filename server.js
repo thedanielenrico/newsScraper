@@ -19,7 +19,7 @@ app.set("view engine", "handlebars");
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScraperdb";
 
 mongoose.connect(MONGODB_URI);
-// mongoose.connect("mongodb://localhost/newsScraperdb", { useNewUrlParser: true });
+
 
 // Routes                       
 app.get("/", function (req, res) {
@@ -31,6 +31,13 @@ app.get("/", function (req, res) {
     res.render("index", hbsObject);
   })
 
+
+})
+app.post("/save:id", function(req, res){
+  const id = req.params.id;
+  console.log(id)
+  // db.Article.updateOne({ _id : ObjectId(id) }, {  $set: {saved: true}});
+  db.Article.update({ _id : ObjectId(id)}, { $set: {saved: true}})
 
 })
 
@@ -74,9 +81,6 @@ app.get("/scrape", function (req, res) {
 app.get("/clear", function (req, res) {
   db.Article.deleteMany().then(function (data) {
     res.redirect("/");
-
-
-
   })
 })
 
