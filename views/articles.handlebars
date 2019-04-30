@@ -41,10 +41,10 @@
                 </a>
 
             </h3>
-            <button class="btn btn-secondary noteBtn" data-id="{{id}}">
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-{{id}}">
                 Article Note
             </button>
-            <button class="btn btn-secondary noteBtn" data-id="{{id}}">
+            <button class="btn btn-secondary deleteArticleBtn" data-id="{{id}}">
                 Delete Article
             </button>
         </div>
@@ -52,6 +52,30 @@
             <p>
                 {{summary}}
             </p>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-{{id}}" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title articleNote"> {{title}} </h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="noteText">Note</label>
+                        <textarea class="form-control" class="noteText" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary saveNoteBtn" data-id="{{id}}">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
     {{/if}}

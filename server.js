@@ -33,15 +33,16 @@ app.get("/", function (req, res) {
 
 
 })
-app.post("/save:id", function(req, res){
-  const id = req.params.id;
-  console.log(id)
-  // db.Article.updateOne({ _id : ObjectId(id) }, {  $set: {saved: true}});
-  db.Article.update({ _id : ObjectId(id)}, { $set: {saved: true}})
+app.get("/articles", function (req, res) {
 
-})
+  db.Article.find({}).then(function (data) {
+    let hbsObject = {
+      article: data
+    }
 
-
+    res.render("articles", hbsObject);
+  })
+});
 app.get("/scrape", function (req, res) {
 
   axios.get("https://www.washingtonpost.com/").then(function (response) {
@@ -84,17 +85,27 @@ app.get("/clear", function (req, res) {
   })
 })
 
+app.post("/save/:id", function(req, res){
+  const id = req.params.id;
+  console.log("route line 90")
 
-app.get("/articles", function (req, res) {
-
-  db.Article.find({}).then(function (data) {
-    let hbsObject = {
-      article: data
-    }
-
-    res.render("articles", hbsObject);
+  db.Article.update({ _id : id}, { $set: {saved: true}})
+  .then(function(data){
+    res.json(data)
   })
-});
+
+})
+app.post("/delete/:id", function(req, res){
+  const id = req.params.id;
+
+  db.Article.update({ _id : id}, { $set: {saved: false}})
+  .then(function(data){
+    res.json(data)
+  })
+})
+
+
+
 
 
 app.get("/articles/:id", function (req, res) {
