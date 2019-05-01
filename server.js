@@ -103,38 +103,43 @@ app.post("/delete/:id", function(req, res){
     res.json(data)
   })
 })
+app.post("/note/:id", function(req,res){
+  const id = req.params.id;
+  // console.log(id)
+  console.log(req.body)
+})
 
 
 
 
 
-app.get("/articles/:id", function (req, res) {
-  db.Article.findOne({ _id: req.params.id })
-    .populate("note").then(function (data) {
-      res.json(data);
-    })
-  // TODO
-  // ====
-  // Finish the route so it finds one article using the req.params.id,
-  // and run the populate method with "note",
-  // then responds with the article with the note included
-});
+// app.get("/articles/:id", function (req, res) {
+//   db.Article.findOne({ _id: req.params.id })
+//     .populate("note").then(function (data) {
+//       res.json(data);
+//     })
+//   // TODO
+//   // ====
+//   // Finish the route so it finds one article using the req.params.id,
+//   // and run the populate method with "note",
+//   // then responds with the article with the note included
+// });
 
-// Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function (req, res) {
-  console.log(req.body);
-  db.Note.create(req.body).then(function (data) {
+// // Route for saving/updating an Article's associated Note
+// app.post("/articles/:id", function (req, res) {
+//   console.log(req.body);
+//   db.Note.create(req.body).then(function (data) {
 
 
-    return db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { note: data._id } }, { new: true });
-  });
+//     return db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { note: data._id } }, { new: true });
+//   });
 
-  // TODO
-  // ====
-  // save the new note that gets posted to the Notes collection
-  // then find an article from the req.params.id
-  // and update it's "note" property with the _id of the new note
-});
+//   // TODO
+//   // ====
+//   // save the new note that gets posted to the Notes collection
+//   // then find an article from the req.params.id
+//   // and update it's "note" property with the _id of the new note
+// });
 
 // Start the server
 app.listen(PORT, function () {
